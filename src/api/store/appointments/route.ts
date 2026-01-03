@@ -1,0 +1,39 @@
+import { MedusaRequest, MedusaResponse } from "@medusajs/framework/http";
+import { APPOINTMENT_MODULE } from "../../../modules/appointment";
+import AppointmentModuleService from "../../../modules/appointment/service";
+
+interface CreateAppointmentDTO {
+  name: string;
+  email: string;
+  phone_number: string;
+  location: string;
+  appointment_type: "in-store" | "styling";
+  date: string;
+  time: string;
+}
+
+export const GET = async (req: MedusaRequest, res: MedusaResponse) => {
+  const appointmentService = req.scope.resolve(
+    APPOINTMENT_MODULE
+  ) as AppointmentModuleService;
+
+  const [appointments, count] =
+    await appointmentService.listAndCountAppointments(
+      {},
+      { order: { created_at: "DESC" } }
+    );
+
+  res.json({ appointments, count });
+};
+
+export const POST = async (req: MedusaRequest, res: MedusaResponse) => {
+  const appointmentService = req.scope.resolve(
+    APPOINTMENT_MODULE
+  ) as AppointmentModuleService;
+
+  const data = req.body as unknown as any;
+
+  const appointment = await appointmentService.createAppointments(data);
+
+  res.status(200).json({ appointment });
+};
