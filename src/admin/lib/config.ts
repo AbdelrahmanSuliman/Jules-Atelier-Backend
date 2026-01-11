@@ -1,7 +1,7 @@
 import Medusa from "@medusajs/js-sdk";
 
 export const sdk = new Medusa({
-  baseUrl: process.env.MEDUSA_ADMIN_BACKEND_URL || "http://localhost:9000",
+  baseUrl: "https://zonked-beam-favour.medusajs.app",
   debug: process.env.NODE_ENV === "development",
   auth: {
     type: "session",
