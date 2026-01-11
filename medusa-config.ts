@@ -1,9 +1,13 @@
 const { loadEnv, defineConfig } = require("@medusajs/framework/utils");
 
-// Load environment variables based on the current environment
 loadEnv(process.env.NODE_ENV || "development", process.cwd());
 
 module.exports = defineConfig({
+  modules: [
+    {
+      resolve: "./src/modules/appointment",
+    },
+  ],
   projectConfig: {
     databaseUrl: process.env.DATABASE_URL,
     http: {
