@@ -27,7 +27,7 @@ interface Appointment {
 
 const AppointmentPage = () => {
   const { data: apptResponse, isLoading: loadingAppts } = useQuery({
-    queryFn: () => sdk.client.fetch<any>(`/store/appointments`),
+    queryFn: () => sdk.client.fetch<any>(`/admin/appointments`),
     queryKey: ["appointments"],
   });
 
