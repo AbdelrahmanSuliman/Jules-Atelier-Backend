@@ -2,12 +2,11 @@ import { MedusaRequest, MedusaResponse } from "@medusajs/framework/http";
 import { APPOINTMENT_MODULE } from "../../../modules/appointment";
 import AppointmentModuleService from "../../../modules/appointment/service";
 
-// Define the shape of our incoming request
 interface CreateAppointmentDTO {
   name: string;
   email: string;
   phone_number: string;
-  location?: string; // Optional city/location from user
+  location?: string;
   appointment_type: "in-store" | "styling";
   date: string;
   time: string;
