@@ -24,9 +24,4 @@ module.exports = defineConfig({
       "https://zonked-beam-favour.medusajs.app",
     disable: process.env.DISABLE_MEDUSA_ADMIN === "true",
   },
-  modules: [
-    {
-      resolve: "./src/modules/appointment",
-    },
-  ],
 });
