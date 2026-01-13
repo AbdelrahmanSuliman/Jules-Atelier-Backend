@@ -6,9 +6,6 @@ export default async function productWebhookHandler({
 }: SubscriberArgs<{ id: string }>) {
   const logger = container.resolve("logger");
 
-  // Example: call your external webhook / service to refetch this product
-  // Replace URL with your own endpoint
-  // Replace this line in your Subscriber
   await fetch(
     `${process.env.STORE_URL}/api/revalidate?secret=${process.env.REVALIDATE_SECRET}`,
     {
@@ -24,5 +21,5 @@ export default async function productWebhookHandler({
 }
 
 export const config: SubscriberConfig = {
-  event: ["product.created", "product.updated"],
+  event: ["product.created", "product.updated", "product.deleted"],
 };
