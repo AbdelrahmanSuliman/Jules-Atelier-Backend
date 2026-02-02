@@ -1,23 +1,14 @@
+// medusa/src/subscribers/product-updated.ts
 import type { SubscriberArgs, SubscriberConfig } from "@medusajs/framework";
 
-export default async function productWebhookHandler({
+export default async function productUpdatedHandler({
   event: { data },
   container,
 }: SubscriberArgs<{ id: string }>) {
-  const logger = container.resolve("logger");
+  console.log("Revalidate subscriber fired for product", data.id);
 
-  await fetch(
-    `${process.env.STORE_URL}/api/revalidate?secret=${process.env.REVALIDATE_SECRET}`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ product_id: data.id }),
-    }
-  );
-
-  logger.info(`Triggered external webhook for product ${data.id}`);
+  // send request to Next.js storefront to revalidate cache
+  await fetch(`${process.env.STOREFRONT_URL}/api/revalidate?tags=products`);
 }
 
 export const config: SubscriberConfig = {
